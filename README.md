@@ -12,5 +12,4 @@ docker run -it -d \
 -e TELEGRAM_TOKEN=YOUR_TELEGRAM_TOKEN \
 $(docker build -q .)
 ```
-
 and ask AI about anything in your telegram bot.
