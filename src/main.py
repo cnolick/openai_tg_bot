@@ -36,14 +36,14 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 
 async def question(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    model_engine = "text-davinci-003"
     logger.info('get message:' + update.message.text)
     if int(update.message.chat.id) == int(os.getenv('CHAT_ID')):
         try:
-            completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[
+            completion = openai.ChatCompletion.create(model=os.getenv('MODEL_NAME'), messages=[
                 {"role": "user", "content": update.message.text}])
             await  update.message.reply_text(completion.choices[0].message.content)
         except Exception as e:
+            logger.error(f'Error: {e}')
             await update.message.reply_text('UPS, try again')
     else:
         await update.message.reply_text("Sorry, i'm private bot but if you want you "
